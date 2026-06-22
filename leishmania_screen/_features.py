@@ -14,7 +14,9 @@ Feature vector layout (2,946 columns total):
 
 from __future__ import annotations
 
+import os
 import warnings
+from contextlib import contextmanager
 from typing import List, Tuple
 
 import numpy as np
@@ -22,7 +24,7 @@ import pandas as pd
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    from rdkit import Chem
+    from rdkit import Chem, RDLogger
     from rdkit.Chem import AllChem, Descriptors, rdMolDescriptors, DataStructs
     from rdkit.Chem import rdFingerprintGenerator
     try:
@@ -30,6 +32,20 @@ with warnings.catch_warnings():
         _AVALON_OK = True
     except ImportError:
         _AVALON_OK = False
+
+RDLogger.DisableLog("rdApp.*")
+
+
+@contextmanager
+def _silence_stderr():
+    devnull = open(os.devnull, "w")
+    old = os.dup(2)
+    os.dup2(devnull.fileno(), 2)
+    try:
+        yield
+    finally:
+        os.dup2(old, 2)
+        devnull.close()
 
 
 _DESCRIPTOR_NAMES: list[str] | None = None
@@ -119,7 +135,7 @@ def compute_features(smiles: str, mol: Chem.Mol) -> pd.DataFrame:
     Build the full 2,946-column feature row for one molecule.
     Returns a single-row DataFrame with named columns.
     """
-    with warnings.catch_warnings():
+    with warnings.catch_warnings(), _silence_stderr():
         warnings.simplefilter("ignore")
         desc  = _rdkit_descriptors(mol)
         mfp   = _morgan(mol)

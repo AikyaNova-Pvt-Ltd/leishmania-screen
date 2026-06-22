@@ -15,6 +15,6 @@ Quick start
 
 from ._predict import predict, PredictionResult, THRESHOLD
 
-__version__ = "1.0.0"
+__version__ = "1.0.3"
 __author__  = "Madhavi et al."
 __all__     = ["predict", "PredictionResult", "THRESHOLD"]

@@ -4,16 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "leishmania-screen"
-version     = "1.0.0"
+version     = "1.0.3"
 description = "Neural network virtual screening for antileishmanial activity against Leishmania donovani"
 readme      = "README.md"
 license     = { text = "MIT" }
 requires-python = ">=3.9"
 
 authors = [
-  { name = "Belaguppa Manjunath Ashwin Desai", email = "ceo@aikyanova.com" },
+  { name = "Belaguppa Manjunath Ashwin Desai (CEO, AikyaNova)" },
   { name = "Pronama Biswas" },
   { name = "Madhavi Bhatt" },
+]
+maintainers = [
+  { name = "Belaguppa Manjunath Ashwin Desai", email = "ceo@aikyanova.com" },
 ]
 
 keywords = [
@@ -56,6 +59,7 @@ leishscreen = "leishmania_screen.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
+exclude = ["tests*"]
 
 [tool.setuptools.package-data]
 leishmania_screen = ["data/*.pkl", "data/*.pth", "data/*.py"]
