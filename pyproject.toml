@@ -1,0 +1,61 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "leishmania-screen"
+version     = "1.0.0"
+description = "Neural network virtual screening for antileishmanial activity against Leishmania donovani"
+readme      = "README.md"
+license     = { text = "MIT" }
+requires-python = ">=3.9"
+
+authors = [
+  { name = "Belaguppa Manjunath Ashwin Desai", email = "ceo@aikyanova.com" },
+  { name = "Pronama Biswas" },
+  { name = "Madhavi Bhatt" },
+]
+
+keywords = [
+  "leishmania",
+  "drug discovery",
+  "virtual screening",
+  "cheminformatics",
+  "deep learning",
+  "QSAR",
+]
+
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+  "torch>=2.0",
+  "scikit-learn>=1.7",
+  "numpy>=1.24",
+  "pandas>=1.5",
+  "joblib>=1.2",
+  "rdkit>=2023.3",
+]
+
+[project.scripts]
+leishscreen = "leishmania_screen.cli:main"
+
+[project.urls]
+"Source Code" = "https://github.com/AikyaNova-Pvt-Ltd/leishmania-screen"
+"Bug Tracker"  = "https://github.com/AikyaNova-Pvt-Ltd/leishmania-screen/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+leishmania_screen = ["data/*.pkl", "data/*.pth", "data/*.py"]
